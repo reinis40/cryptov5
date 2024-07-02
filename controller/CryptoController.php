@@ -4,9 +4,6 @@ namespace App\Controller;
 
 use App\Service\CryptoManager;
 use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 
 class CryptoController
 {
@@ -19,21 +16,26 @@ class CryptoController
         $this->twig = $twig;
     }
 
-    /**
-     * @throws SyntaxError
-     * @throws RuntimeError
-     * @throws LoaderError
-     */
-    public function getTopCryptos(): string
+    public function getTopCryptos(): array
     {
-        $cryptos = $this->cryptoManager->getCryptoListings();
-        return $this->twig->render('top.twig', ['cryptos' => $cryptos, 'current_page' => 'top']);
+        return [
+              'template' => 'top.twig',
+              'data' => [
+                    'cryptos' => $this->cryptoManager->getCryptoListings(),
+                    'current_page' => 'top'
+              ]
+        ];
     }
-    public function home() {
 
-        echo $this->twig->render('home.twig');
+    public function home(): array
+    {
+        return [
+              'template' => 'home.twig',
+              'data' => []
+        ];
     }
-    public function searchCryptos(): string
+
+    public function searchCryptos(): array
     {
         $symbol = $_GET['symbol'] ?? '';
         $result = null;
@@ -42,10 +44,17 @@ class CryptoController
             $result = $this->cryptoManager->searchCryptos($symbol);
         }
 
-        return $this->twig->render('search.twig', ['result' => $result, 'symbol' => $symbol, 'current_page' => 'search']);
+        return [
+              'template' => 'search.twig',
+              'data' => [
+                    'result' => $result,
+                    'symbol' => $symbol,
+                    'current_page' => 'search'
+              ]
+        ];
     }
 
-    public function buyCrypto(): string
+    public function buyCrypto(): array
     {
         $symbol = $_GET['symbol'] ?? '';
         $amountEUR = $_GET['amount'] ?? '';
@@ -56,10 +65,16 @@ class CryptoController
             $result = "Error: Symbol and amount must be provided.";
         }
 
-        return $this->twig->render('buy.twig', ['result' => $result, 'current_page' => 'buy']);
+        return [
+              'template' => 'buy.twig',
+              'data' => [
+                    'result' => $result,
+                    'current_page' => 'buy'
+              ]
+        ];
     }
 
-    public function sellCrypto(): string
+    public function sellCrypto(): array
     {
         $symbol = $_GET['symbol'] ?? '';
 
@@ -69,18 +84,33 @@ class CryptoController
             $result = "Error: Symbol must be provided.";
         }
 
-        return $this->twig->render('sell.twig', ['result' => $result, 'current_page' => 'sell']);
+        return [
+              'template' => 'sell.twig',
+              'data' => [
+                    'result' => $result,
+                    'current_page' => 'sell'
+              ]
+        ];
     }
 
-    public function showWallet(): string
+    public function showWallet(): array
     {
-        $walletEntries = $this->cryptoManager->getWallet();
-        return $this->twig->render('wallet.twig', ['walletEntries' => $walletEntries]);
+        return [
+              'template' => 'wallet.twig',
+              'data' => [
+                    'walletEntries' => $this->cryptoManager->getWallet()
+              ]
+        ];
     }
 
-    public function showTransactions(): string
+    public function showTransactions(): array
     {
-        $transactions = $this->cryptoManager->getTransactions();
-        return $this->twig->render('transactions.twig', ['transactions' => $transactions, 'current_page' => 'transactions']);
+        return [
+              'template' => 'transactions.twig',
+              'data' => [
+                    'transactions' => $this->cryptoManager->getTransactions(),
+                    'current_page' => 'transactions'
+              ]
+        ];
     }
 }
