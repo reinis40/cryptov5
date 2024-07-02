@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sell Cryptocurrency</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        form {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #ff772e;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #ff772e;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #ff772e;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+        }
+        .error {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f2dede;
+            color: #ff772e;
+            border: 1px solid #ebccd1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+{% include 'nav.twig' with {'current_page': 'top'} %}
+<h1>Sell Cryptocurrency</h1>
+<form method="get" action="/sell">
+    <label for="symbol">Symbol:</label>
+    <input type="text" id="symbol" name="symbol" required>
+    <input type="submit" value="Sell">
+</form>
+{% if result %}
+    <div class="result">{{ result }}</div>
+{% endif %}
+{% if symbol and not result %}
+    <div class="error">Error: Unable to process the sell order for {{ symbol }}.</div>
+{% endif %}
+</body>
+</html>

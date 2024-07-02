@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Cryptocurrency</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            color: #333;
+        }
+        h1 {
+            margin: 20px 0;
+            color: #ff772e;
+            transition: color 0.9s ease;
+            transition: margin 0.9s ease;
+        }
+        form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #ff772e;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #f6975a;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0px 0px 80px #999;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 12px;
+        }
+        th {
+            background-color: #ff772e;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr {
+            transition: background-color 0.6s ease;
+        }
+        tr:hover {
+            background-color: #f6975a;
+        }
+    </style>
+</head>
+<body>
+{% include 'nav.twig' with {'current_page': 'top'} %}
+<h1>Homepage</h1>
+</body>
+</html>

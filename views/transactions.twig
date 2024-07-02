@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', sans-serif;
+            margin: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 14px;
+        }
+        h1 {
+            margin: 20px 0;
+            color: #ff772e;
+            text-align: center;
+            transition: color 0.9s ease;
+            transition: margin 0.9s ease;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0px 0px 8px #999;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #ff772e;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr {
+            transition: background-color 0.6s ease;
+        }
+        tr.buy {
+            color: green;
+        }
+        tr.sell {
+            color: red;
+        }
+        tr:hover {
+            background-color: #f6975a;
+        }
+    </style>
+</head>
+<body>
+{% include 'nav.twig' with {'current_page': 'top'} %}
+<h1>Transaction History</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for transaction in transactions %}
+        <tr class="{% if transaction.type == 'buy' %}buy{% elseif transaction.type == 'sell' %}sell{% endif %}">
+            <td>{{ transaction.type }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.symbol }}</td>
+            <td>{{ transaction.price }}</td>
+            <td>{{ transaction.date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
